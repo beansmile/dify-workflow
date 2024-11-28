@@ -4,19 +4,41 @@ app:
   icon_background: '#FFEAD5'
   mode: workflow
   name: 小红书运营一条龙
+  use_icon_as_answer_icon: false
 kind: app
-version: 0.1.1
+version: 0.1.3
 workflow:
   conversation_variables: []
   environment_variables: []
   features:
     file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
       image:
         enabled: false
         number_limits: 3
         transfer_methods:
         - local_file
         - remote_url
+      number_limits: 3
     opening_statement: ''
     retriever_resource:
       enabled: true
@@ -197,7 +219,7 @@ workflow:
         vision:
           configs:
             detail: high
-          enabled: true
+          enabled: false
       height: 98
       id: '1724667967367'
       position:
@@ -250,7 +272,7 @@ workflow:
         vision:
           configs:
             detail: high
-          enabled: true
+          enabled: false
       height: 98
       id: '1724668244170'
       position:
@@ -296,7 +318,7 @@ workflow:
         vision:
           configs:
             detail: high
-          enabled: true
+          enabled: false
       height: 98
       id: '1724668427743'
       position:
@@ -336,29 +358,32 @@ workflow:
     - data:
         authorization:
           config:
-            api_key: your-imgrender-key
+            api_key: 298845100895770054.lPjulRkBszvVlFeQGNTeD2vJY3runtmv
             header: X-API-Key
             type: custom
           type: api-key
         body:
-          data: "{\n    \"width\": 1024,\n    \"height\": 1024,\n    \"backgroundColor\"\
-            : \"#ffffff\",\n    \"borderColor\": \"#ffffff\",\n    \"borderWidth\"\
-            : 0,\n    \"borderRadius\": 0,\n    \"borderTopLeftRadius\": 0,\n    \"\
-            borderTopRightRadius\": 0,\n    \"borderBottomLeftRadius\": 0,\n    \"\
-            borderBottomRightRadius\": 0,\n    \"texts\": [\n        {\n         \
-            \   \"x\": 224,\n            \"y\": 114,\n            \"text\": \"{{#1724668427743.text#}}\"\
-            ,\n            \"width\": 600,\n            \"font\": \"Alibaba-PuHuiTi-Heavy\"\
-            ,\n            \"fontSize\": 70,\n            \"lineHeight\": 80,\n  \
-            \          \"lineSpacing\": 1.3,\n            \"color\": \"#000000\",\n\
-            \            \"textAlign\": \"left\",\n            \"zIndex\": 1\n   \
-            \     }\n    ],\n    \"images\": [\n        {\n            \"x\": 0,\n\
-            \            \"y\": 0,\n            \"width\": 1024,\n            \"height\"\
-            : 1024,\n            \"url\": \"https://assets.sfw96.com/bg-tmpl-1024.jpg\"\
-            ,\n            \"borderColor\": \"#000000\",\n            \"borderWidth\"\
-            : 0,\n            \"borderRadius\": 0,\n            \"borderTopLeftRadius\"\
-            : 0,\n            \"borderTopRightRadius\": 0,\n            \"borderBottomLeftRadius\"\
-            : 0,\n            \"borderBottomRightRadius\": 0,\n            \"zIndex\"\
-            : 0\n        }\n    ]\n  }\n\n"
+          data:
+          - type: text
+            value: "{\n    \"width\": 1024,\n    \"height\": 1024,\n    \"backgroundColor\"\
+              : \"#ffffff\",\n    \"borderColor\": \"#ffffff\",\n    \"borderWidth\"\
+              : 0,\n    \"borderRadius\": 0,\n    \"borderTopLeftRadius\": 0,\n  \
+              \  \"borderTopRightRadius\": 0,\n    \"borderBottomLeftRadius\": 0,\n\
+              \    \"borderBottomRightRadius\": 0,\n    \"texts\": [\n        {\n\
+              \            \"x\": 224,\n            \"y\": 114,\n            \"text\"\
+              : \"{{#1724668427743.text#}}\",\n            \"width\": 600,\n     \
+              \       \"font\": \"Alibaba-PuHuiTi-Heavy\",\n            \"fontSize\"\
+              : 70,\n            \"lineHeight\": 80,\n            \"lineSpacing\"\
+              : 1.3,\n            \"color\": \"#000000\",\n            \"textAlign\"\
+              : \"left\",\n            \"zIndex\": 1\n        }\n    ],\n    \"images\"\
+              : [\n        {\n            \"x\": 0,\n            \"y\": 0,\n     \
+              \       \"width\": 1024,\n            \"height\": 1024,\n          \
+              \  \"url\": \"https://assets.sfw96.com/bg-tmpl-1024.jpg\",\n       \
+              \     \"borderColor\": \"#000000\",\n            \"borderWidth\": 0,\n\
+              \            \"borderRadius\": 0,\n            \"borderTopLeftRadius\"\
+              : 0,\n            \"borderTopRightRadius\": 0,\n            \"borderBottomLeftRadius\"\
+              : 0,\n            \"borderBottomRightRadius\": 0,\n            \"zIndex\"\
+              : 0\n        }\n    ]\n  }\n\n"
           type: json
         desc: ''
         headers: Content-Type:application/json
@@ -373,7 +398,7 @@ workflow:
         type: http-request
         url: https://api.imgrender.net/open/v1/pics
         variables: []
-      height: 106
+      height: 110
       id: '1724917671343'
       position:
         x: 1339.840462497475
@@ -381,7 +406,7 @@ workflow:
       positionAbsolute:
         x: 1339.840462497475
         y: 282
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -390,14 +415,15 @@ workflow:
         code: "import json\n\ndef main(req: str) -> dict:\n    # Parse the JSON string\
           \ (which is already the body content)\n    data = json.loads(req)\n    \n\
           \    # Extract url from the parsed data\n    url = data['data']['url']\n\
-          \    \n    # Create and return the result dictionary\n    return {\n   \
-          \     \"cover_url\": url\n    }"
+          \    \n    url_array = [url] if isinstance(url, str) else url\n    # Create\
+          \ and return the result dictionary\n    return {\n        \"cover_url\"\
+          : url_array\n    }"
         code_language: python3
         desc: ''
         outputs:
           cover_url:
             children: null
-            type: string
+            type: array[string]
         selected: false
         title: 获取封面图URl
         type: code
@@ -421,20 +447,11 @@ workflow:
       width: 244
     - data:
         desc: ''
-        selected: true
-        template: '[封面图]({{ cover }})
+        selected: false
+        template: '{{ {''title'': title, ''body'': body, ''covers'': cover } | tojson
+          | safe }}
 
-
-          ## 标题
-
-
-          {{ title }}
-
-
-          ## 正文
-
-
-          {{ body }}'
+          '
         title: 组装结果
         type: template-transform
         variables:
@@ -458,12 +475,12 @@ workflow:
       positionAbsolute:
         x: 1936.7982345041403
         y: 282
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: 170.15698102569377
-      y: -53.38158688869237
+      x: -0.0572072961658705
+      y: 35.86202102992388
       zoom: 0.9923559189970101
