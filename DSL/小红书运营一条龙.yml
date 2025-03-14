@@ -378,7 +378,7 @@ workflow:
               : \"left\",\n            \"zIndex\": 1\n        }\n    ],\n    \"images\"\
               : [\n        {\n            \"x\": 0,\n            \"y\": 0,\n     \
               \       \"width\": 1024,\n            \"height\": 1024,\n          \
-              \  \"url\": \"https://assets.sfw96.com/bg-tmpl-1024.jpg\",\n       \
+              \  \"url\": \"https://beansmile-official-website.oss-cn-hongkong.aliyuncs.com/beansmile_blog_server_production/2oh30udvptv8brzgbd3lfcjfa1ka\",\n       \
               \     \"borderColor\": \"#000000\",\n            \"borderWidth\": 0,\n\
               \            \"borderRadius\": 0,\n            \"borderTopLeftRadius\"\
               : 0,\n            \"borderTopRightRadius\": 0,\n            \"borderBottomLeftRadius\"\
